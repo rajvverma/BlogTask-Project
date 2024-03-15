@@ -1,0 +1,38 @@
+<h1>Blog's Listing Page</h1>
+<div class="dropdown" style="float: right;">
+    <%= button_to 'Logout', logout_path, class: "nav-link", method: :delete %>
+    <% if logged_in? %>
+       <li class="nav-item">
+         <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+       </li>
+    <% end %>
+
+  </div>
+</div>
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Description</th>
+			<th colspan="6">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @blogs.each do |blog| %>
+		<tr>
+			<td><%= blog.title %></td>
+			<td><%= blog.description %></td>
+			<td><%= link_to 'Show', blog_path(blog) %></td>
+			<% if logged_in? && blog.user == current_user %>
+				<td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+				<td><%= button_to 'Delete', blog_path(blog), method: :delete, onclick: "return confirm('Are you sure you want to delete this blog?');"  %></td>
+			<% end %>
+
+
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<p>
+  <%= link_to 'Create new blog', new_blog_path %>
+</p>

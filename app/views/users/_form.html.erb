@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= form_with(model: @user, local: true) do |f| %>
+        <div class="form-group row">
+          <%= f.label :username %>
+          <div>
+            <%= f.text_field :username, placeholder: "Enter a username" %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :email %>
+          <div> 
+            <%= f.email_field :email, placeholder: "Enter your email address" %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :password %>
+          <div class="col-10"> 
+            <%= f.password_field :password, placeholder: "Choose a password" %>
+          </div>
+        </div>
+
+        <div>
+            <%= f.submit(@user.new_record? ? "Sign up" : "Update account", class: "btn btn-outline-light btn-lg") %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to '[ Back to login Page ]', login_path, class: "text-info" %>
+
+    </div>
+  </div>
+</div>
